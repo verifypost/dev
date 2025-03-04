@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup Form</title>
     <style>
-        /* Background to look like a document */
+        /* Background with real document image */
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: url('https://www.transparenttextures.com/patterns/white-paper.png'), #f8f8f8;
+            background: url('https://images.unsplash.com/photo-1519378058457-4c3ad1d70c67') no-repeat center center;
+            background-size: cover;
             position: relative;
         }
 
@@ -23,11 +24,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3); /* Semi-transparent dark overlay */
-            backdrop-filter: blur(5px); /* Adds a blur effect */
+            background: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay */
+            backdrop-filter: blur(5px); /* Blurred effect */
         }
 
-        /* Centered Form */
+        /* Form container */
         .container {
             position: relative;
             text-align: center;
@@ -35,7 +36,7 @@
             padding: 25px 50px;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            z-index: 1; /* Ensures form is above overlay */
+            z-index: 1; /* Ensure form is above overlay */
         }
 
         input {
@@ -64,7 +65,7 @@
 </head>
 <body>
 
-    <!-- Overlay covering the background -->
+    <!-- Overlay -->
     <div class="overlay"></div>
 
     <!-- Signup Form -->
@@ -77,37 +78,6 @@
             <button type="submit">Submit</button>
         </form>
     </div>
-
-    <script>
-        document.getElementById("signupForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-            const retypePassword = document.getElementById("retypePassword").value;
-
-            if (password !== retypePassword) {
-                alert("Passwords do not match!");
-                return;
-            }
-
-            try {
-                const response = await fetch("https://3xgsg0xy90.execute-api.us-east-1.amazonaws.com/tresdwe3/signup", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email, password })
-                });
-
-                if (!response.ok) {
-                    throw new Error("Invalid credentials access denied");
-                }
-
-                alert("Signup successful!");
-            } catch (error) {
-                alert(error.message);
-            }
-        });
-    </script>
 
 </body>
 </html>
